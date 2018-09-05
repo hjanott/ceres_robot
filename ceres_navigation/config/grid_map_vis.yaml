@@ -1,0 +1,36 @@
+grid_map_visualizations:
+
+  - name: /map
+    type: occupancy_grid
+    params:
+      layer: static
+      data_min: -1.0
+      data_max: 100.0
+
+  - name: static
+    type: occupancy_grid
+    params:
+      layer: static
+      data_min: -1.0
+      data_max: 100.0
+
+  - name: static_inflated
+    type: occupancy_grid
+    params:
+      layer: static_inflated
+      data_min: -1.0
+      data_max: 100.0
+
+  - name: dynamic
+    type: occupancy_grid
+    params:
+      layer: dynamic
+      data_min: -1.0
+      data_max: 100.0
+
+  - name: inflation
+    type: occupancy_grid
+    params:
+      layer: inflation
+      data_min: 0.0
+      data_max: 100.0

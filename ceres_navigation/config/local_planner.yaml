@@ -1,0 +1,9 @@
+local_planner: "eband_local_planner/EBandPlannerROS"
+# "dwa_local_planner/DWAPlannerROS"
+#"base_local_planner/TrajectoryPlannerROS"
+TrajectoryPlannerROS:
+  holonomic_robot: false
+
+EBandPlannerROS:
+  controller_max_retries: 10
+
