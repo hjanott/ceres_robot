@@ -19,7 +19,7 @@ def get_path_goal_cb(userdata, goal):
     goal.use_start_pose = False
     goal.tolerance = 0.2
     goal.target_pose = userdata.target_pose
-    goal.global_planner = 'global_planner'
+    goal.planner = 'global_planner'
 
 
 @smach.cb_interface(
@@ -38,7 +38,7 @@ def get_path_result_cb(userdata, status, result):
 @smach.cb_interface(input_keys=['path'])
 def ex_path_goal_cb(userdata, goal):
     goal.path = userdata.path
-    goal.local_planner = 'dwa_local_planner'
+    goal.controller = 'eband'
 
 
 @smach.cb_interface(
@@ -92,7 +92,7 @@ def main():
                                                            GetPathAction,
                                                            goal_cb=get_path_goal_cb,
                                                            result_cb=get_path_result_cb),
-                               transitions={'success': 'EXE_PATH',
+                               transitions={'success': 'EXE_PATH', # EXE_PATH GET_PATH WAIT_FOR_GOAL
                                             'failure': 'WAIT_FOR_GOAL'})
 
         smach.StateMachine.add('EXE_PATH',

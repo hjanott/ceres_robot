@@ -1,9 +1,9 @@
 <launch>
-
   <arg name="amcl" default="true" />
   <arg name="mapserver" default="true" />
   <arg name="gmapping" default="false" />
   <arg name="rviz" default="false" />
+  <arg name="smach" default="true" />
   <arg name="map" default="$(find ceres_navigation)/maps/avz_6_floor_gazebo.yaml"/>
 
   <!-- Map Server -->
@@ -16,12 +16,13 @@
   <include if="$(arg gmapping)" file="$(find ceres_navigation)/launch/gmapping.launch" />
 
   <!-- Move Base Flex -->
+  <!-- add launch-prefix="gdb -ex run - -args" (double dash before args, XML doesn't allow this in comments..) for enable gdb-->
   <node pkg="mbf_costmap_nav" type="mbf_costmap_nav" respawn="false" name="move_base_flex" args="$(arg map)" output="screen">
     <param name="tf_timeout" value="1.5"/>
-    <param name="global_planner_max_retries" value="3"/>
-    <rosparam file="$(find ceres_navigation)/config/global_planner.yaml" command="load" />
-
-    <rosparam file="$(find ceres_navigation)/config/local_planner.yaml" command="load" />
+    <param name="planner_max_retries" value="3"/>
+    <rosparam file="$(find ceres_navigation)/config/planners.yaml" command="load" />
+   <!-- <rosparam file="$(find ceres_navigation)/config/mprim.yaml" command="load" />-->
+    <rosparam file="$(find ceres_navigation)/config/controllers.yaml" command="load" />
     <rosparam file="$(find ceres_navigation)/config/recovery_behaviors.yaml" command="load" />
     <rosparam file="$(find ceres_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap"/>
     <rosparam file="$(find ceres_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
@@ -30,7 +31,7 @@
   </node>
 
   <!-- SMACH Navigation State Machine -->
-  <node pkg="ceres_navigation" type="mbf_state_machine.py" name="mbf_state_machine" output="screen"/>
+  <node if="$(arg smach)" pkg="ceres_navigation" type="mbf_state_machine.py" name="mbf_state_machine" output="screen"/>
 
   <!-- RViz with config -->
   <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find ceres_navigation)/rviz/move_base_flex.rviz" />

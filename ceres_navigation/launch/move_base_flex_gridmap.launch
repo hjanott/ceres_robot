@@ -25,13 +25,13 @@
   <node pkg="mbf_gridmap_nav" type="mbf_gridmap_nav" respawn="false" name="move_base_flex" output="screen" launch-prefix="xterm -e gdb --args">
     <param name="use_polygon" type="bool" value="false" />
     <param name="tf_timeout" type="double" value="1.5" />
-    <param name="resolution" type="double" value="0.1" />
+    <param name="resolution" type="double" value="0.05" />
     <param name="inflation_distance" type="double" value="0.4" />
     <param name="local_map_length" type="double" value="7.5" />
     <param name="global_planner_max_retries" value="3"/>
 
-    <rosparam file="$(find ceres_navigation)/config/global_planner.yaml" command="load" />
-    <rosparam file="$(find ceres_navigation)/config/local_planner.yaml" command="load" />
+    <rosparam file="$(find ceres_navigation)/config/planners.yaml" command="load" />
+    <rosparam file="$(find ceres_navigation)/config/controllers.yaml" command="load" />
     <rosparam file="$(find ceres_navigation)/config/recovery_behaviors.yaml" command="load" />
     <rosparam file="$(find ceres_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap"/>
     <rosparam file="$(find ceres_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />

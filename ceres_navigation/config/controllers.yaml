@@ -1,8 +1,6 @@
 controllers:
    - name: 'eband'
      type: 'eband_local_planner/EBandPlannerROS'
-   - name: 'dwa'
-     type: 'dwa_local_planner/DWAPlannerROS'
 eband:
   Ctrl_Rate: 20.0
   bubble_velocity_multiplier: 2.0
@@ -38,6 +36,3 @@ eband:
   virtual_mass: 100.0
   xy_goal_tolerance: 0.2
   yaw_goal_tolerance: 0.2
-dwa:
-  path_distance_bias: 75.0
-  goal_distance_bias: 48.0
