@@ -8,7 +8,7 @@ global_planner:
   visualize_potential: true
   use_dijkstra: true
   use_quadratic: true
-  use_grid_path: false
+  use_grid_path: true
   old_navfn_behaviour: false
   lethal_cost: 253
   neutral_cost: 66
